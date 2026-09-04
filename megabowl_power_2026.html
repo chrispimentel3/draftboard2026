@@ -2,801 +2,492 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mega Bowl 2026 — Power Rankings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mega Bowl 2026 — Draft Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --field:#0C1712;
-  --panel:#132821;
-  --panel2:#0F1F19;
-  --line:#22463A;
-  --chalk:#E9F0EA;
-  --muted:#7C9589;
-  --hot:#E8B33C;
-  --cold:#4FB8C9;
-  --bad:#D9654E;
-}
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  background:var(--field);
-  color:var(--chalk);
-  font-family:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size:15px;
-  line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 80px}
+  :root{
+    --felt:#1E2C28;
+    --felt-dark:#16211E;
+    --felt-line:#2E423C;
+    --card:#E8E3D5;
+    --card-dim:#C9C4B7;
+    --ink:#1A211F;
+    --ink-soft:#5E6763;
+    --bone:#EDE9DE;
+    --mine:#E4B34A;
 
-header.top{
-  display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px 28px;
-  padding-bottom:18px;border-bottom:2px solid var(--line);margin-bottom:8px;
-}
-h1{
-  font-size:34px;font-weight:800;letter-spacing:-.02em;margin:0;
-}
-h1 span{color:var(--muted);font-weight:500}
-.meta{color:var(--muted);font-size:13px;margin-left:auto;text-align:right}
+    --qb:#C2452D;
+    --rb:#3B6EA5;
+    --wr:#D08A1E;
+    --te:#7A4E9E;
+    --k:#6B7B8C;
+    --def:#4C6B3C;
+  }
 
-nav.tabs{display:flex;gap:2px;margin:20px 0 22px;flex-wrap:wrap}
-nav.tabs button{
-  background:transparent;border:1px solid var(--line);border-radius:0;
-  color:var(--muted);padding:8px 16px;font-size:14px;font-weight:600;
-  cursor:pointer;font-family:inherit;
-}
-nav.tabs button:hover{color:var(--chalk)}
-nav.tabs button[aria-selected="true"]{background:var(--chalk);color:var(--field);border-color:var(--chalk)}
-nav.tabs button:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+  *{box-sizing:border-box;}
 
-.panel{background:var(--panel);border:1px solid var(--line);padding:20px;margin-bottom:20px}
-.panel h2{font-size:17px;font-weight:700;margin:0 0 4px}
-.panel p.note{color:var(--muted);font-size:13px;margin:0 0 16px;max-width:70ch}
+  html,body{margin:0;padding:0;}
 
-table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
-th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
-th{
-  color:var(--muted);font-size:12px;font-weight:600;
-  border-bottom:2px solid var(--line);cursor:default;
-}
-th.sortable{cursor:pointer}
-th.sortable:hover{color:var(--chalk)}
-th[aria-sort]{color:var(--chalk)}
-td.team,th.team{text-align:left;font-weight:600;white-space:normal;min-width:150px}
-td.rk,th.rk{text-align:right;width:38px;color:var(--muted);font-weight:700}
-tbody tr:hover{background:var(--panel2)}
-tr.me td{background:rgba(232,179,60,.09)}
-tr.me td.team{box-shadow:inset 3px 0 0 var(--hot)}
+  body{
+    background:var(--felt);
+    color:var(--bone);
+    font-family:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
 
-.bar{display:block;height:6px;background:var(--line);position:relative;min-width:70px}
-.bar i{display:block;height:100%;background:var(--chalk)}
-.hot{color:var(--hot)}
-.cold{color:var(--cold)}
-.dim{color:var(--muted)}
+  /* ---------- masthead ---------- */
+  header.top{
+    padding:34px 28px 20px;
+    border-bottom:1px solid var(--felt-line);
+  }
 
-.empty{
-  border:1px dashed var(--line);padding:32px 20px;text-align:center;color:var(--muted);
-}
-.empty strong{display:block;color:var(--chalk);font-weight:600;margin-bottom:6px}
+  .title{
+    font-size:clamp(30px,5vw,52px);
+    font-weight:800;
+    letter-spacing:-0.025em;
+    line-height:0.94;
+    margin:0;
+  }
+  .title span{color:var(--mine);}
 
-label.fld{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-weight:600}
-select,input[type=text],input[type=number],textarea{
-  background:var(--panel2);border:1px solid var(--line);color:var(--chalk);
-  padding:8px 10px;font-family:inherit;font-size:14px;border-radius:0;
-  font-variant-numeric:tabular-nums;
-}
-select:focus,input:focus,textarea:focus{outline:2px solid var(--hot);outline-offset:-1px}
-textarea{width:100%;min-height:170px;resize:vertical;line-height:1.45}
-input.score{width:90px;text-align:right}
+  .subtitle{
+    margin:10px 0 0;
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:15px;
+    color:#9AA5A0;
+    max-width:62ch;
+    line-height:1.5;
+  }
 
-.btn{
-  background:var(--chalk);color:var(--field);border:1px solid var(--chalk);
-  padding:9px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;
-}
-.btn:hover{background:#fff}
-.btn.ghost{background:transparent;color:var(--chalk);border-color:var(--line)}
-.btn.ghost:hover{border-color:var(--chalk);background:transparent}
-.btn.danger{background:transparent;color:var(--bad);border-color:var(--bad)}
-.btn:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:16px}
+  /* ---------- controls ---------- */
+  .controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px;
+    align-items:center;
+    padding:16px 28px;
+    border-bottom:1px solid var(--felt-line);
+    background:var(--felt-dark);
+    position:relative;
+    z-index:6;
+  }
 
-.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
-.entry{display:flex;align-items:center;justify-content:space-between;gap:10px;
-  border:1px solid var(--line);padding:8px 10px}
-.entry span{font-size:14px;overflow:hidden;text-overflow:ellipsis}
+  .chipset{display:flex;gap:6px;flex-wrap:wrap;align-items:center;}
 
-.msg{padding:10px 12px;border-left:3px solid var(--hot);background:var(--panel2);
-  font-size:13.5px;margin-bottom:14px}
-.msg.err{border-color:var(--bad)}
+  .chipset-label{
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:13px;
+    color:#8B9691;
+    margin-right:4px;
+  }
 
-.mx{font-size:11.5px}
-.mx th,.mx td{padding:5px 6px}
-.mx td.p{color:var(--field);font-weight:700}
+  .chip{
+    font-family:'Archivo Narrow',sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.02em;
+    padding:5px 11px;
+    border-radius:2px;
+    border:1px solid transparent;
+    background:#25332F;
+    color:#B9C2BE;
+    cursor:pointer;
+    transition:background .12s,color .12s,border-color .12s;
+  }
+  .chip:hover{background:#2E3E39;}
+  .chip:focus-visible{outline:2px solid var(--mine);outline-offset:2px;}
+  .chip[aria-pressed="true"]{color:#12100C;}
+  .chip[data-pos="QB"][aria-pressed="true"]{background:var(--qb);color:#fff;}
+  .chip[data-pos="RB"][aria-pressed="true"]{background:var(--rb);color:#fff;}
+  .chip[data-pos="WR"][aria-pressed="true"]{background:var(--wr);}
+  .chip[data-pos="TE"][aria-pressed="true"]{background:var(--te);color:#fff;}
+  .chip[data-pos="K"][aria-pressed="true"]{background:var(--k);color:#fff;}
+  .chip[data-pos="DEF"][aria-pressed="true"]{background:var(--def);color:#fff;}
+  .chip.reset[aria-pressed="true"]{background:var(--bone);color:var(--ink);}
 
-.legend{color:var(--muted);font-size:12.5px;margin-top:14px;line-height:1.7;max-width:78ch}
-.legend b{color:var(--chalk);font-weight:600}
-.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-@media (max-width:640px){
-  h1{font-size:26px}
-  .wrap{padding:20px 14px 60px}
-  .meta{margin-left:0;text-align:left;width:100%}
-}
-@media (prefers-reduced-motion:no-preference){
-  .bar i{transition:width .25s ease}
-}
+  .search{
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:14px;
+    padding:6px 10px;
+    width:190px;
+    background:#25332F;
+    border:1px solid var(--felt-line);
+    border-radius:2px;
+    color:var(--bone);
+  }
+  .search::placeholder{color:#79837F;}
+  .search:focus{outline:2px solid var(--mine);outline-offset:1px;}
+
+  .hint{
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:13px;
+    color:#79837F;
+    margin-left:auto;
+  }
+
+  /* ---------- board ---------- */
+  .scroller{
+    overflow:auto;
+    max-height:calc(100vh - 60px);
+    padding-bottom:40px;
+  }
+
+  .board{
+    display:grid;
+    grid-template-columns:52px repeat(12,158px);
+    min-width:max-content;
+  }
+
+  /* header cells */
+  .th{
+    position:sticky;
+    top:0;
+    z-index:4;
+    background:var(--felt-dark);
+    border-right:1px solid var(--felt-line);
+    border-bottom:2px solid var(--felt-line);
+    padding:10px 10px 8px;
+    cursor:pointer;
+    user-select:none;
+  }
+  .th.corner{
+    left:0;
+    z-index:5;
+    cursor:default;
+    border-right:1px solid var(--felt-line);
+  }
+  .th .seat{
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:11px;
+    color:#79837F;
+    letter-spacing:0.06em;
+  }
+  .th .team{
+    font-family:'Archivo Narrow',sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+    line-height:1.15;
+    margin-top:2px;
+    color:var(--bone);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .th .tally{
+    display:flex;
+    gap:3px;
+    margin-top:7px;
+    flex-wrap:wrap;
+  }
+  .tally b{
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:10.5px;
+    font-weight:700;
+    padding:1px 4px;
+    border-radius:2px;
+    color:#12100C;
+  }
+  .th.mine{background:#2B2A1C;border-bottom-color:var(--mine);}
+  .th.mine .team{color:var(--mine);}
+  .th.spot{background:#33443E;}
+
+  /* round rail */
+  .rd{
+    position:sticky;
+    left:0;
+    z-index:3;
+    background:var(--felt-dark);
+    border-right:1px solid var(--felt-line);
+    border-bottom:1px solid var(--felt-line);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    padding:4px 0;
+  }
+  .rd .n{
+    font-weight:800;
+    font-size:17px;
+    color:#8B9691;
+    line-height:1;
+  }
+  .rd .dir{
+    font-size:11px;
+    color:#4E5B57;
+    line-height:1;
+  }
+
+  /* pick cards */
+  .cell{
+    border-right:1px solid var(--felt-line);
+    border-bottom:1px solid var(--felt-line);
+    padding:6px;
+  }
+  .cell.mine{background:rgba(228,179,74,0.07);}
+  .cell.spot{background:rgba(255,255,255,0.05);}
+
+  .pick{
+    position:relative;
+    height:100%;
+    background:var(--card);
+    border-left:5px solid var(--card-dim);
+    border-radius:2px;
+    padding:6px 8px 7px 8px;
+    color:var(--ink);
+    transition:opacity .12s, filter .12s;
+  }
+  .pick .no{
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:10.5px;
+    font-weight:700;
+    color:#8C8878;
+    letter-spacing:0.04em;
+  }
+  .pick .name{
+    font-family:'Archivo Narrow',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    line-height:1.12;
+    margin:1px 0 4px;
+    letter-spacing:-0.005em;
+  }
+  .pick .meta{
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  .pos{
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:10.5px;
+    font-weight:700;
+    padding:1px 5px;
+    border-radius:2px;
+    color:#fff;
+  }
+  .nfl{
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:11.5px;
+    color:#7C7869;
+    font-weight:600;
+    letter-spacing:0.05em;
+  }
+
+  .pos.QB,.tally b.QB{background:var(--qb);color:#fff;}
+  .pos.RB,.tally b.RB{background:var(--rb);color:#fff;}
+  .pos.WR,.tally b.WR{background:var(--wr);color:#241a06;}
+  .pos.TE,.tally b.TE{background:var(--te);color:#fff;}
+  .pos.K,.tally b.K{background:var(--k);color:#fff;}
+  .pos.DEF,.tally b.DEF{background:var(--def);color:#fff;}
+
+  .pick.QB{border-left-color:var(--qb);}
+  .pick.RB{border-left-color:var(--rb);}
+  .pick.WR{border-left-color:var(--wr);}
+  .pick.TE{border-left-color:var(--te);}
+  .pick.K{border-left-color:var(--k);}
+  .pick.DEF{border-left-color:var(--def);}
+
+  .pick.muted{opacity:0.2;filter:saturate(0.2);}
+
+  .pick.mine{
+    box-shadow:0 0 0 2px var(--mine);
+  }
+
+  /* footer legend */
+  footer{
+    padding:22px 28px 60px;
+    border-top:1px solid var(--felt-line);
+    font-family:'Archivo Narrow',sans-serif;
+    font-size:13.5px;
+    color:#8B9691;
+    line-height:1.6;
+  }
+  footer strong{color:var(--bone);font-weight:700;}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
 
 <header class="top">
-  <h1>Mega Bowl <span>2026</span></h1>
-  <div class="meta" id="metaLine"></div>
+  <h1 class="title">Mega Bowl 2026 <span>Draft Board</span></h1>
+  <p class="subtitle">12 teams, 15 rounds, snake order. Half-PPR. Seat 8 is yours — highlighted in gold. Click any team name to isolate that roster, or filter by position to see how runs moved through the room.</p>
 </header>
 
-<nav class="tabs" role="tablist">
-  <button role="tab" id="tab-board" aria-selected="true" onclick="show('board')">Power board</button>
-  <button role="tab" id="tab-week" aria-selected="false" onclick="show('week')">Week detail</button>
-  <button role="tab" id="tab-enter" aria-selected="false" onclick="show('enter')">Enter scores</button>
-  <button role="tab" id="tab-sched" aria-selected="false" onclick="show('sched')">Schedule</button>
-</nav>
-
-<!-- ============ BOARD ============ -->
-<section id="v-board">
-  <div class="panel">
-    <h2>Power board</h2>
-    <p class="note">Power score is expected wins divided by 14, exactly as the workbook computes it. Unplayed weeks count as zero, so the number climbs all season and only compares teams against each other within the same week.</p>
-    <div id="boardBody"></div>
+<div class="controls">
+  <div class="chipset">
+    <span class="chipset-label">Position</span>
+    <button class="chip reset" data-pos="ALL" aria-pressed="true">All</button>
+    <button class="chip" data-pos="QB" aria-pressed="false">QB</button>
+    <button class="chip" data-pos="RB" aria-pressed="false">RB</button>
+    <button class="chip" data-pos="WR" aria-pressed="false">WR</button>
+    <button class="chip" data-pos="TE" aria-pressed="false">TE</button>
+    <button class="chip" data-pos="K" aria-pressed="false">K</button>
+    <button class="chip" data-pos="DEF" aria-pressed="false">DEF</button>
   </div>
-  <div class="panel">
-    <h2>Luck ledger</h2>
-    <p class="note">Actual wins minus expected wins. Positive means the schedule has been kind.</p>
-    <div id="luckBody"></div>
-  </div>
-</section>
+  <input class="search" id="search" type="search" placeholder="Find a player…" aria-label="Find a player">
+  <span class="hint" id="hint">180 picks</span>
+</div>
 
-<!-- ============ WEEK ============ -->
-<section id="v-week" hidden>
-  <div class="panel">
-    <div class="row">
-      <div>
-        <label class="fld" for="wkPick">Week</label>
-        <select id="wkPick" onchange="renderWeek()"></select>
-      </div>
-    </div>
-    <div id="weekBody"></div>
-  </div>
-</section>
+<div class="scroller">
+  <div class="board" id="board"></div>
+</div>
 
-<!-- ============ ENTER ============ -->
-<section id="v-enter" hidden>
-  <div class="panel">
-    <h2>Paste from Yahoo</h2>
-    <p class="note">Open the league matchups page for the week, select the matchup block, copy, and paste it below. Nothing is saved until you review the parsed numbers and confirm. Pairings found in the paste are also written into the schedule.</p>
-    <div class="row">
-      <div>
-        <label class="fld" for="pasteWk">Week</label>
-        <select id="pasteWk"></select>
-      </div>
-    </div>
-    <textarea id="pasteBox" placeholder="Paste the Yahoo matchup block here.
-
-Also accepts one team per line:
-TaylorMade  120.06
-L'Omar, 106.20"></textarea>
-    <div class="row" style="margin-top:12px">
-      <button class="btn" onclick="doParse()">Read paste</button>
-      <button class="btn ghost" onclick="document.getElementById('pasteBox').value=''">Clear</button>
-    </div>
-    <div id="parseOut"></div>
-  </div>
-
-  <div class="panel">
-    <h2>Type scores</h2>
-    <p class="note">Edit any week directly. Leave a box empty to mark that team as not yet played.</p>
-    <div class="row">
-      <div>
-        <label class="fld" for="manWk">Week</label>
-        <select id="manWk" onchange="renderManual()"></select>
-      </div>
-    </div>
-    <div id="manualBody"></div>
-    <div class="row" style="margin-top:16px">
-      <button class="btn" onclick="saveManual()">Save week</button>
-      <button class="btn ghost" onclick="clearWeek()">Clear this week</button>
-    </div>
-  </div>
-
-  <div class="panel">
-    <h2>Your data</h2>
-    <p class="note">Load the file <code>yahoo_fetch.py</code> writes to pull teams, pairings and scores straight from Yahoo. Importing replaces any week present in the file and leaves the rest alone. Everything otherwise lives in this browser only, so export before switching devices.</p>
-    <div class="row">
-      <label class="btn" for="importFile">Load from Yahoo export</label>
-      <input id="importFile" type="file" accept=".json,application/json" hidden
-             onchange="if(this.files[0])importData(this.files[0]);this.value=''">
-      <button class="btn ghost" onclick="exportCsv()">Download scores CSV</button>
-      <button class="btn ghost" onclick="exportJson()">Download backup</button>
-      <button class="btn danger" onclick="wipe()">Erase all scores</button>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SCHEDULE ============ -->
-<section id="v-sched" hidden>
-  <div class="panel">
-    <h2>Schedule</h2>
-    <p class="note">Weeks 1 and 2 came straight from Yahoo. Fill the rest as you go, or let the paste-parser record them for you. Head-to-head records and the luck ledger only count weeks with a pairing.</p>
-    <div class="row">
-      <div>
-        <label class="fld" for="schedWk">Week</label>
-        <select id="schedWk" onchange="renderSched()"></select>
-      </div>
-    </div>
-    <div id="schedBody"></div>
-    <div class="row" style="margin-top:16px">
-      <button class="btn" onclick="saveSched()">Save pairings</button>
-    </div>
-  </div>
-</section>
-
-<p class="legend">
-  <b>xW</b> expected wins — the average chance of beating each of the other 11 teams that week, using a logistic curve on the score gap with the week's own spread as the scale.
-  <b>Power</b> season xW divided by 14.
-  <b>Luck</b> real wins minus xW.
-  <b>All-play</b> record against everyone, every week.
-  <b>CV</b> week-to-week volatility; low means steady, high means boom or bust.
-  <b>Ceiling</b> power score if every remaining week were a first-place finish.
-</p>
+<footer>
+  <strong>Reading the board.</strong> Rounds run left-to-right on odd rounds and right-to-left on even rounds — the arrow in the round rail shows the direction. The number in each card's corner is the overall pick. Colored tape on the left edge of each card marks the position, and the tally under each team name is that roster's final positional shape.
+</footer>
 
 <script>
-"use strict";
+const TEAMS = ["deez nuts","TyRick Hill","Undisputed","Any Given Ya…","L'Omar","I Chase Brow…","Bed Bath & B…","TaylorMade","JAH PLS","Play Action …","BillsMafia","Crabcakes an…"];
+const MY_SEAT = 8;
 
-/* ---------- league ---------- */
-const WEEKS = 14;
-const ME = 1;
-const TEAMS = [
-  {id:1,  name:"TaylorMade"},
-  {id:2,  name:"Bed Bath & Bijan"},
-  {id:3,  name:"BillsMafia"},
-  {id:4,  name:"Play Action xavier"},
-  {id:5,  name:"Any Given Yasser"},
-  {id:6,  name:"deez nuts"},
-  {id:7,  name:"Barkley's Balls Deep"},
-  {id:8,  name:"Revenge of the Smith"},
-  {id:9,  name:"L'Omar"},
-  {id:10, name:"Crabcakes and Football"},
-  {id:11, name:"TyRick Hill"},
-  {id:12, name:"Undisputed"}
+// Each round listed in DRAFT ORDER (pick 1..12 of that round).
+const ROUNDS = [
+["Jahmyr Gibbs|RB|DET","Ja'Marr Chase|WR|CIN","Bijan Robinson|RB|ATL","Jonathan Taylor|RB|IND","Puka Nacua|WR|LAR","Saquon Barkley|RB|PHI","Amon-Ra St. Brown|WR|DET","Christian McCaffrey|RB|SF","James Cook III|RB|BUF","Jaxon Smith-Njigba|WR|SEA","Kenneth Walker III|RB|KC","CeeDee Lamb|WR|DAL"],
+["Chase Brown|RB|CIN","Justin Jefferson|WR|MIN","Derrick Henry|RB|BAL","De'Von Achane|RB|MIA","Malik Nabers|WR|NYG","Omarion Hampton|RB|LAC","A.J. Brown|WR|NE","Lamar Jackson|QB|BAL","Nico Collins|WR|HOU","Kyren Williams|RB|LAR","Javonte Williams|RB|DAL","Drake London|WR|ATL"],
+["George Pickens|WR|DAL","Travis Etienne Jr.|RB|NO","Brock Bowers|TE|LV","Ashton Jeanty|RB|LV","Zay Flowers|WR|BAL","Josh Allen|QB|BUF","Rashee Rice|WR|KC","Breece Hall|RB|NYJ","DeVonta Smith|WR|PHI","Jeremiyah Love|RB|ARI","Chris Olave|WR|NO","Trey McBride|TE|ARI"],
+["Tee Higgins|WR|CIN","D'Andre Swift|RB|CHI","Ladd McConkey|WR|LAC","Jaylen Waddle|WR|DEN","Emeka Egbuka|WR|TB","Garrett Wilson|WR|NYJ","Cam Skattebo|RB|NYG","Bucky Irving|RB|TB","Tetairoa McMillan|WR|CAR","David Montgomery|RB|HOU","Colston Loveland|TE|CHI","Bhayshul Tuten|RB|JAX"],
+["Luther Burden III|WR|CHI","Joe Burrow|QB|CIN","Terry McLaurin|WR|WAS","Sam LaPorta|TE|DET","Quinshon Judkins|RB|CLE","DJ Moore|WR|BUF","Tyler Warren|TE|IND","Jadarian Price|RB|SEA","Rome Odunze|WR|CHI","Jalen Hurts|QB|PHI","Jameson Williams|WR|DET","Mike Evans|WR|SF"],
+["Rhamondre Stevenson|RB|NE","Davante Adams|WR|LAR","Tucker Kraft|TE|GB","Parker Washington|WR|JAX","Christian Watson|WR|GB","Justin Herbert|QB|LAC","Marvin Harrison Jr.|WR|ARI","Carnell Tate|WR|TEN","Drake Maye|QB|NE","Caleb Williams|QB|CHI","TreVeyon Henderson|RB|NE","Josh Downs|WR|IND"],
+["MarShawn Lloyd|RB|GB","DK Metcalf|WR|PIT","Quentin Johnston|WR|LAC","Stefon Diggs|WR|WAS","Jaylen Warren|RB|PIT","Tony Pollard|RB|TEN","Jonathon Brooks|RB|CAR","Jayden Daniels|QB|WAS","Dak Prescott|QB|DAL","Rico Dowdle|RB|PIT","Harold Fannin Jr.|TE|CLE","Trevor Lawrence|QB|JAX"],
+["Blake Corum|RB|LAR","Brock Purdy|QB|SF","Chuba Hubbard|RB|CAR","RJ Harvey|RB|DEN","J.K. Dobbins|RB|DEN","Chris Godwin Jr.|WR|TB","Jordan Mason|RB|MIN","Brian Thomas Jr.|WR|JAX","KC Concepcion|WR|CLE","Courtland Sutton|WR|DEN","Jordan Addison|WR|MIN","Dalton Kincaid|TE|BUF"],
+["Michael Pittman Jr.|WR|PIT","Makai Lemon|WR|PHI","Jacory Croskey-Merritt|RB|WAS","Kenny Gainwell|RB|TB","Kyle Pitts Sr.|TE|ATL","Alec Pierce|WR|IND","Aaron Jones Sr.|RB|MIN","George Kittle|TE|SF","Josh Jacobs|RB|GB","Isaiah Likely|TE|NYG","Michael Wilson|WR|ARI","Jayden Reed|WR|GB"],
+["Kyle Monangai|RB|CHI","Bo Nix|QB|DEN","Wan'Dale Robinson|WR|TEN","Matthew Golden|WR|GB","Travis Kelce|TE|KC","Brandon Aubrey|K|DAL","Rams|DEF|LAR","De'Zhaun Stribling|WR|SF","Mike Washington Jr.|RB|LV","Woody Marks|RB|HOU","Cameron Dicker|K|LAC","Isiah Pacheco|RB|DET"],
+["Jalen Coker|WR|CAR","Matthew Stafford|QB|LAR","Xavier Worthy|WR|KC","Romeo Doubs|WR|NE","Texans|DEF|HOU","Tyjae Spears|RB|TEN","Rachaad White|RB|WAS","Kyler Murray|QB|MIN","Mark Andrews|TE|BAL","Ka'imi Fairbairn|K|HOU","Chris Rodriguez Jr.|RB|JAX","Patrick Mahomes|QB|KC"],
+["Broncos|DEF|DEN","Dallas Goedert|TE|PHI","Deebo Samuel Sr.|WR|SF","Khalil Shakir|WR|BUF","Keaton Mitchell|RB|LAC","Tyler Allgeier|RB|ARI","Jake Ferguson|TE|DAL","Brian Robinson|RB|ATL","Seahawks|DEF|SEA","Jaxson Dart|QB|NYG","Alvin Kamara|RB|NO","Jared Goff|QB|DET"],
+["Jordyn Tyson|WR|NO","Najee Harris|RB|NYG","Eagles|DEF|PHI","Jason Myers|K|SEA","Jakobi Meyers|WR|JAX","Tank Bigsby|RB|PHI","Jonah Coleman|RB|DEN","Ravens|DEF|BAL","Oronde Gadsden|TE|LAC","Kayshon Boutte|WR|HOU","Jordan Love|QB|GB","Cam Little|K|JAX"],
+["Zach Charbonnet|RB|SEA","Vikings|DEF|MIN","Cooper Kupp|WR|SEA","Patriots|DEF|NE","Tyler Loop|K|BAL","Juwan Johnson|TE|NO","Rashid Shaheed|WR|SEA","Harrison Mevis|K|LAR","Tyler Shough|QB|NO","Will Reichard|K|MIN","Kaelon Black|RB|SF","Jake Bates|K|DET"],
+["Justice Hill|RB|BAL","Steelers|DEF|PIT","James Conner|RB|ARI","Hunter Henry|TE|NE","Ja'Kobi Lane|WR|BAL","Ray Davis|RB|BUF","Jalen McMillan|WR|TB","Denzel Boston|WR|CLE","Andy Borregales|K|NE","49ers|DEF|SF","Cairo Santos|K|CHI","Tre Tucker|WR|LV"]
 ];
-const N = TEAMS.length;
-const NAME = {}; TEAMS.forEach(t=>NAME[t.id]=t.name);
 
-/* pulled from the Yahoo league page */
-const SCHEDULE_SEED = {
-  1: [[1,5],[2,10],[3,12],[4,7],[6,11],[8,9]],
-  2: [[1,10],[2,11],[3,5],[4,9],[6,8],[7,12]]
-};
+// Build seat-indexed grid: grid[round][seat] = {name,pos,team,overall}
+const grid = [];
+const rosters = Array.from({length:12},()=>[]);
 
-const KEY = "megabowl2026_power_v1";
-let state = load();
-
-function blank(){
-  const sched = {};
-  for(let w=1;w<=WEEKS;w++) sched[w] = SCHEDULE_SEED[w] ? SCHEDULE_SEED[w].map(p=>p.slice()) : [];
-  return {scores:{}, schedule:sched, teamNames:{}};
-}
-function load(){
-  try{
-    const raw = localStorage.getItem(KEY);
-    if(!raw) return blank();
-    const d = JSON.parse(raw);
-    const b = blank();
-    if(d && d.scores) b.scores = d.scores;
-    if(d && d.schedule) for(let w=1;w<=WEEKS;w++) if(d.schedule[w]) b.schedule[w]=d.schedule[w];
-    if(d && d.teamNames) b.teamNames = d.teamNames;
-    return b;
-  }catch(e){ return blank(); }
-}
-function save(){
-  try{ localStorage.setItem(KEY, JSON.stringify(state)); }
-  catch(e){ alert("Could not save to this browser's storage."); }
-}
-
-/* ---------- math, mirroring the workbook ---------- */
-function stdevS(a){
-  const n=a.length; if(n<2) return 0;
-  const m=a.reduce((x,y)=>x+y,0)/n;
-  return Math.sqrt(a.reduce((s,v)=>s+(v-m)*(v-m),0)/(n-1));
-}
-function weekEngine(wk){
-  const sc = state.scores[wk] || {};
-  const ids = TEAMS.map(t=>t.id).filter(id=>typeof sc[id]==="number" && isFinite(sc[id]));
-  if(ids.length < 2) return null;
-  const vals = ids.map(id=>sc[id]);
-  const scale = (stdevS(vals)/1.7) || 0.01;      // STDEV.S / 1.7
-  const desc = vals.slice().sort((a,b)=>b-a);
-  const out = {ids, scale, sc, xw:{}, rank:{}, rankXW:{}, mx:{}};
-  ids.forEach(id=>{
-    out.rank[id] = desc.indexOf(sc[id]) + 1;      // RANK: ties share a rank
-    out.rankXW[id] = (N - out.rank[id]) / (N - 1);
-    out.mx[id] = {};
-    let sum=0, cnt=0;
-    ids.forEach(o=>{
-      if(o===id) return;
-      const p = 1/(1+Math.exp(-((sc[id]-sc[o])/scale)));
-      out.mx[id][o]=p; sum+=p; cnt++;
-    });
-    out.xw[id] = cnt ? sum/cnt : 0;
+ROUNDS.forEach((round, r) => {
+  const row = new Array(12);
+  round.forEach((raw, i) => {
+    const [name,pos,team] = raw.split("|");
+    const seat = (r % 2 === 0) ? (i + 1) : (12 - i);
+    const overall = r * 12 + i + 1;
+    const pick = {name,pos,team,overall,round:r+1,seat};
+    row[seat-1] = pick;
+    rosters[seat-1].push(pick);
   });
-  return out;
-}
-function season(){
-  const eng={}, played=[];
-  for(let w=1;w<=WEEKS;w++){
-    const e = weekEngine(w);
-    if(e){ eng[w]=e; played.push(w); }
-  }
-  const rows = TEAMS.map(t=>{
-    const scores=[], xws=[];
-    played.forEach(w=>{
-      const s = state.scores[w][t.id];
-      if(typeof s==="number"){ scores.push(s); xws.push(eng[w].xw[t.id]); }
-    });
-    const xWins = xws.reduce((a,b)=>a+b,0);
-    const pf = scores.reduce((a,b)=>a+b,0);
-    const avg = scores.length ? pf/scores.length : 0;
-    const cv = (scores.length>1 && avg) ? stdevS(scores)/avg : 0;
+  grid.push(row);
+});
 
-    // real record from the schedule
-    let w_=0,l_=0,t_=0,pa=0,gp=0;
-    played.forEach(wk=>{
-      (state.schedule[wk]||[]).forEach(pair=>{
-        if(pair[0]!==t.id && pair[1]!==t.id) return;
-        const opp = pair[0]===t.id ? pair[1] : pair[0];
-        const a = state.scores[wk][t.id], b = state.scores[wk][opp];
-        if(typeof a!=="number" || typeof b!=="number") return;
-        gp++; pa+=b;
-        if(a>b) w_++; else if(a<b) l_++; else t_++;
-      });
-    });
+const ORDER = ["QB","RB","WR","TE","K","DEF"];
+const board = document.getElementById("board");
+const frag = document.createDocumentFragment();
 
-    // all-play
-    let apW=0, apG=0;
-    played.forEach(wk=>{
-      const e=eng[wk];
-      if(!e.mx[t.id]) return;
-      e.ids.forEach(o=>{
-        if(o===t.id) return;
-        apG++;
-        if(e.sc[t.id] > e.sc[o]) apW++;
-        else if(e.sc[t.id] === e.sc[o]) apW+=0.5;
-      });
-    });
+// header row
+const corner = document.createElement("div");
+corner.className = "th corner";
+corner.innerHTML = '<div class="seat">RD</div>';
+frag.appendChild(corner);
 
-    const ceiling = (xWins + Math.max(0, WEEKS - played.length)) / WEEKS;
+TEAMS.forEach((t, i) => {
+  const seat = i + 1;
+  const counts = {};
+  rosters[i].forEach(p => counts[p.pos] = (counts[p.pos]||0)+1);
+  const tally = ORDER.filter(p => counts[p])
+    .map(p => `<b class="${p}">${p} ${counts[p]}</b>`).join("");
 
-    return {
-      id:t.id, name:t.name,
-      gp, w:w_, l:l_, t:t_, pf, pa, avg, cv,
-      xWins, power:xWins/WEEKS, ceiling,
-      luck:(w_ + 0.5*t_) - xWins,
-      apW, apG, apPct: apG? apW/apG : 0,
-      weeks: played.map(w=>({w, s:state.scores[w][t.id], xw:eng[w].xw[t.id], rank:eng[w].rank[t.id]}))
-    };
-  });
-  return {rows, played, eng};
-}
+  const th = document.createElement("div");
+  th.className = "th" + (seat === MY_SEAT ? " mine" : "");
+  th.dataset.seat = seat;
+  th.setAttribute("role","button");
+  th.setAttribute("tabindex","0");
+  th.innerHTML = `<div class="seat">SEAT ${seat}</div>
+    <div class="team">${t}</div>
+    <div class="tally">${tally}</div>`;
+  frag.appendChild(th);
+});
 
-/* ---------- helpers ---------- */
-const $ = id => document.getElementById(id);
-const f1 = n => n.toFixed(1);
-const f2 = n => n.toFixed(2);
-const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function norm(s){
-  return String(s).toLowerCase()
-    .replace(/[\u2018\u2019\u201c\u201d]/g,"'")
-    .replace(/&/g," and ")
-    .replace(/[^a-z0-9]/g,"");
-}
-const LOOKUP = {}; TEAMS.forEach(t=>LOOKUP[norm(t.name)] = t.id);
-function matchTeam(line){
-  const k = norm(line);
-  if(!k) return null;
-  if(LOOKUP[k] != null) return LOOKUP[k];
-  for(const t of TEAMS){
-    const n = norm(t.name);
-    if(k.length>3 && (k.indexOf(n)===0 || n.indexOf(k)===0)) return t.id;
-  }
-  return null;
-}
+// body rows
+grid.forEach((row, r) => {
+  const rail = document.createElement("div");
+  rail.className = "rd";
+  rail.innerHTML = `<div class="n">${r+1}</div><div class="dir">${r % 2 === 0 ? "→" : "←"}</div>`;
+  frag.appendChild(rail);
 
-/* ---------- import from the Yahoo fetcher ---------- */
-function applyTeamNames(map){
-  if(!map || !Object.keys(map).length) return;
-  TEAMS.forEach(t=>{ if(map[t.id]) t.name = map[t.id]; });
-  Object.keys(NAME).forEach(k=>delete NAME[k]);
-  Object.keys(LOOKUP).forEach(k=>delete LOOKUP[k]);
-  TEAMS.forEach(t=>{ NAME[t.id]=t.name; LOOKUP[norm(t.name)]=t.id; });
-}
-function importData(file){
-  const fr = new FileReader();
-  fr.onerror = () => alert("Could not read that file.");
-  fr.onload = () => {
-    let d;
-    try{ d = JSON.parse(fr.result); }
-    catch(e){ alert("That file isn't valid JSON."); return; }
-
-    const known = new Set(TEAMS.map(t=>t.id));
-    const said = [];
-    let skipped = 0;
-
-    if(Array.isArray(d.teams)){
-      const map = {};
-      d.teams.forEach(t=>{
-        const id = +t.id;
-        if(known.has(id) && t.name) map[id] = String(t.name);
-        else skipped++;
-      });
-      if(Object.keys(map).length){
-        state.teamNames = map;
-        applyTeamNames(map);
-        said.push(Object.keys(map).length + " team names");
-      }
-    }
-
-    let nSched=0, nScore=0;
-    if(d.schedule) Object.keys(d.schedule).forEach(k=>{
-      const w = +k;
-      if(!(w>=1 && w<=WEEKS)) return;
-      const pairs = (d.schedule[k]||[])
-        .map(p=>[+p[0], +p[1]])
-        .filter(p=>known.has(p[0]) && known.has(p[1]));
-      if(pairs.length){ state.schedule[w] = pairs; nSched++; }
-    });
-    if(d.scores) Object.keys(d.scores).forEach(k=>{
-      const w = +k;
-      if(!(w>=1 && w<=WEEKS)) return;
-      const o = {};
-      Object.keys(d.scores[k]).forEach(t=>{
-        const id = +t, v = +d.scores[k][t];
-        if(known.has(id) && isFinite(v)) o[id] = v;
-      });
-      if(Object.keys(o).length){ state.scores[w] = o; nScore++; }
-    });
-    said.push(nSched + " weeks of pairings", nScore + " weeks of scores");
-
-    save(); render();
-    alert("Loaded " + said.join(", ") + "." +
-          (skipped ? "\n" + skipped + " entry(s) had unrecognised team ids and were ignored." : ""));
-  };
-  fr.readAsText(file);
-}
-
-/* ---------- tabs ---------- */
-let view="board";
-function show(v){
-  view=v;
-  ["board","week","enter","sched"].forEach(k=>{
-    $("v-"+k).hidden = (k!==v);
-    $("tab-"+k).setAttribute("aria-selected", k===v ? "true":"false");
-  });
-  render();
-}
-
-/* ---------- board ---------- */
-let sortKey="power", sortDir=-1;
-function sortBy(k){
-  if(sortKey===k) sortDir*=-1; else { sortKey=k; sortDir=-1; }
-  renderBoard();
-}
-function renderBoard(){
-  const {rows, played} = season();
-  const box = $("boardBody");
-  if(!played.length){
-    box.innerHTML = '<div class="empty"><strong>No scores yet</strong>Add a week under “Enter scores” and the board fills in.</div>';
-    $("luckBody").innerHTML = "";
-    return;
-  }
-  const sorted = rows.slice().sort((a,b)=>{
-    const d = (a[sortKey]-b[sortKey])*sortDir;
-    return d || a.name.localeCompare(b.name);
-  });
-  const maxPower = Math.max(...rows.map(r=>r.power), 0.001);
-  const th = (k,lbl,cls)=>`<th class="sortable ${cls||''}" ${sortKey===k?`aria-sort="${sortDir<0?'descending':'ascending'}"`:''} onclick="sortBy('${k}')">${lbl}</th>`;
-
-  let h = '<div class="scroll"><table><thead><tr>';
-  h += '<th class="rk">#</th><th class="team">Team</th>';
-  h += th("power","Power");
-  h += '<th>Trend</th>';
-  h += th("xWins","xWins") + th("w","W–L") + th("luck","Luck");
-  h += th("apPct","All-play") + th("pf","PF") + th("avg","Avg") + th("cv","CV") + th("ceiling","Ceiling");
-  h += '</tr></thead><tbody>';
-
-  sorted.forEach((r,i)=>{
-    const lk = r.luck>0.35 ? "hot" : r.luck<-0.35 ? "cold" : "dim";
-    h += `<tr class="${r.id===ME?'me':''}">`;
-    h += `<td class="rk">${i+1}</td>`;
-    h += `<td class="team">${esc(r.name)}</td>`;
-    h += `<td>${f2(r.power)}</td>`;
-    h += `<td><span class="bar"><i style="width:${(r.power/maxPower*100).toFixed(1)}%"></i></span></td>`;
-    h += `<td>${f2(r.xWins)}</td>`;
-    h += `<td>${r.w}–${r.l}${r.t?'–'+r.t:''}</td>`;
-    h += `<td class="${lk}">${r.luck>0?'+':''}${f2(r.luck)}</td>`;
-    h += `<td>${r.apG? (r.apPct*100).toFixed(0)+'%' : '<span class="dim">—</span>'}</td>`;
-    h += `<td>${f1(r.pf)}</td>`;
-    h += `<td>${f1(r.avg)}</td>`;
-    h += `<td>${r.cv? f2(r.cv) : '<span class="dim">—</span>'}</td>`;
-    h += `<td class="dim">${f2(r.ceiling)}</td>`;
-    h += '</tr>';
-  });
-  h += '</tbody></table></div>';
-  box.innerHTML = h;
-
-  // luck ledger
-  const lk = rows.slice().sort((a,b)=>b.luck-a.luck);
-  const span = Math.max(1, ...lk.map(r=>Math.abs(r.luck)));
-  let l = '<div class="scroll"><table><thead><tr><th class="team">Team</th><th>Wins</th><th>xWins</th><th>Luck</th><th style="width:45%">&nbsp;</th></tr></thead><tbody>';
-  lk.forEach(r=>{
-    const pct = Math.abs(r.luck)/span*50;
-    const pos = r.luck>=0;
-    l += `<tr class="${r.id===ME?'me':''}"><td class="team">${esc(r.name)}</td>`;
-    l += `<td>${r.w + (r.t?0.5*r.t:0)}</td><td>${f2(r.xWins)}</td>`;
-    l += `<td class="${pos?'hot':'cold'}">${pos?'+':''}${f2(r.luck)}</td>`;
-    l += `<td><span class="bar" style="min-width:100%"><i style="width:${(50+(pos?pct:-pct)).toFixed(1)}%;background:${pos?'var(--hot)':'var(--cold)'};margin-left:${pos?'50%':(50-pct).toFixed(1)+'%'};width:${pct.toFixed(1)}%"></i></span></td></tr>`;
-  });
-  l += '</tbody></table></div>';
-  $("luckBody").innerHTML = l;
-}
-
-/* ---------- week detail ---------- */
-function renderWeek(){
-  const wk = +$("wkPick").value;
-  const e = weekEngine(wk);
-  const box = $("weekBody");
-  if(!e){
-    box.innerHTML = `<div class="empty"><strong>Week ${wk} has no scores</strong>Add them under “Enter scores”.</div>`;
-    return;
-  }
-  const order = e.ids.slice().sort((a,b)=>e.sc[b]-e.sc[a]);
-  let h = `<p class="note">Scale for this week is ${f2(e.scale)} points. A gap that size is worth about a 73% win chance. Expected wins across the league sum to ${f2(e.ids.reduce((s,i)=>s+e.xw[i],0))}.</p>`;
-  h += '<div class="scroll"><table><thead><tr><th class="rk">#</th><th class="team">Team</th><th>Score</th><th>xW</th><th>Rank xW</th><th>Result</th></tr></thead><tbody>';
-  order.forEach(id=>{
-    let res = '<span class="dim">—</span>';
-    const pair = (state.schedule[wk]||[]).find(p=>p[0]===id||p[1]===id);
-    if(pair){
-      const opp = pair[0]===id?pair[1]:pair[0];
-      const b = e.sc[opp];
-      if(typeof b==="number"){
-        const tag = e.sc[id]>b ? '<span class="hot">W</span>' : e.sc[id]<b ? '<span class="cold">L</span>' : 'T';
-        res = `${tag} <span class="dim">vs ${esc(NAME[opp])}</span>`;
-      }
-    }
-    h += `<tr class="${id===ME?'me':''}"><td class="rk">${e.rank[id]}</td><td class="team">${esc(NAME[id])}</td>`;
-    h += `<td>${f2(e.sc[id])}</td><td>${f2(e.xw[id])}</td><td class="dim">${f2(e.rankXW[id])}</td><td style="text-align:left">${res}</td></tr>`;
-  });
-  h += '</tbody></table></div>';
-
-  h += '<h2 style="margin-top:26px;font-size:15px">Head-to-head chances</h2>';
-  h += '<p class="note">Row team\'s chance of beating the column team, on that week\'s scores.</p>';
-  h += '<div class="scroll"><table class="mx"><thead><tr><th class="team"></th>';
-  order.forEach(id=>{ h += `<th>${esc(NAME[id]).slice(0,9)}</th>`; });
-  h += '</tr></thead><tbody>';
-  order.forEach(r=>{
-    h += `<tr><td class="team">${esc(NAME[r])}</td>`;
-    order.forEach(c=>{
-      if(r===c){ h += '<td class="dim">·</td>'; return; }
-      const p = e.mx[r][c];
-      const a = (p*0.85).toFixed(2);
-      h += `<td class="p" style="background:rgba(233,240,234,${a});color:${p>0.45?'var(--field)':'var(--chalk)'}">${p.toFixed(2)}</td>`;
-    });
-    h += '</tr>';
-  });
-  h += '</tbody></table></div>';
-  box.innerHTML = h;
-}
-
-/* ---------- paste parser ---------- */
-let pending = null;
-function doParse(){
-  const wk = +$("pasteWk").value;
-  const text = $("pasteBox").value;
-  const out = $("parseOut");
-  if(!text.trim()){ out.innerHTML = '<div class="msg err">Nothing pasted yet.</div>'; return; }
-
-  const lines = text.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
-  const scores = {}, pairs = [];
-
-  // pass 1 — "Team ... 118.42" on one line
-  const inline = /(-?\d{1,3}\.\d{1,2})\s*$/;
-  lines.forEach(ln=>{
-    const m = ln.match(inline);
-    if(!m) return;
-    const id = matchTeam(ln.slice(0, m.index));
-    if(id!=null) scores[id] = parseFloat(m[1]);
-  });
-
-  // pass 2 — Yahoo block: TEAM  n n  vs  n n  TEAM
-  if(Object.keys(scores).length < 2){
-    const toks = [];
-    lines.forEach(ln=>{
-      if(/^\d+-\d+-\d+$/.test(ln)) return;            // records
-      if(/^vs$/i.test(ln)){ toks.push({k:"vs"}); return; }
-      const id = matchTeam(ln);
-      if(id!=null){ toks.push({k:"t", id}); return; }
-      const m = ln.match(/^(-?\d{1,3}\.\d{1,2})$/);
-      if(m) toks.push({k:"n", v:parseFloat(m[1])});
-    });
-    for(let i=0;i<toks.length;i++){
-      if(toks[i].k!=="t") continue;
-      const a = toks[i].id;
-      let j=i+1, before=[], after=[], seenVs=false, b=null;
-      while(j<toks.length){
-        const tk = toks[j];
-        if(tk.k==="vs"){ seenVs=true; j++; continue; }
-        if(tk.k==="n"){ (seenVs?after:before).push(tk.v); j++; continue; }
-        b = tk.id; break;
-      }
-      if(before.length) scores[a] = before[0];
-      if(seenVs && b!=null){
-        if(after.length) scores[b] = after[0];
-        if(!pairs.some(p=>p.includes(a)||p.includes(b))) pairs.push([a,b]);
-        i = j;                                        // skip past team B
-      }
-    }
-  }
-
-  const found = Object.keys(scores).map(Number);
-  if(!found.length){
-    out.innerHTML = '<div class="msg err">No team names recognised. Check the paste includes team names, or use “Type scores” below.</div>';
-    return;
-  }
-  pending = {wk, scores, pairs};
-
-  let h = `<div class="msg">Read ${found.length} of ${N} teams for week ${wk}${pairs.length?`, plus ${pairs.length} matchup${pairs.length>1?'s':''}`:''}. Check the numbers, fix anything wrong, then confirm.</div>`;
-  h += '<div class="grid2">';
-  TEAMS.forEach(t=>{
-    const v = scores[t.id];
-    h += `<div class="entry"><span>${esc(t.name)}</span><input class="score" type="number" step="0.01" id="pv-${t.id}" value="${v!=null?v:""}"></div>`;
-  });
-  h += '</div>';
-  if(pairs.length){
-    h += '<p class="note" style="margin-top:14px">Pairings: ' + pairs.map(p=>esc(NAME[p[0]])+" vs "+esc(NAME[p[1]])).join(" · ") + '</p>';
-  }
-  h += '<div class="row" style="margin-top:16px"><button class="btn" onclick="commitParse()">Save week '+wk+'</button><button class="btn ghost" onclick="pending=null;document.getElementById(\'parseOut\').innerHTML=\'\'">Discard</button></div>';
-  out.innerHTML = h;
-}
-function commitParse(){
-  if(!pending) return;
-  const wk = pending.wk, obj = {};
-  TEAMS.forEach(t=>{
-    const el = $("pv-"+t.id);
-    const v = el && el.value!=="" ? parseFloat(el.value) : NaN;
-    if(isFinite(v)) obj[t.id] = v;
-  });
-  state.scores[wk] = obj;
-  if(pending.pairs.length && !(state.schedule[wk]||[]).length) state.schedule[wk] = pending.pairs;
-  save();
-  pending = null;
-  $("parseOut").innerHTML = `<div class="msg">Week ${wk} saved with ${Object.keys(obj).length} scores.</div>`;
-  $("pasteBox").value = "";
-  render();
-}
-
-/* ---------- manual ---------- */
-function renderManual(){
-  const wk = +$("manWk").value;
-  const sc = state.scores[wk] || {};
-  let h = '<div class="grid2">';
-  TEAMS.forEach(t=>{
-    const v = sc[t.id];
-    h += `<div class="entry"><span>${esc(t.name)}</span><input class="score" type="number" step="0.01" id="mv-${t.id}" value="${v!=null?v:""}"></div>`;
-  });
-  $("manualBody").innerHTML = h + '</div>';
-}
-function saveManual(){
-  const wk = +$("manWk").value, obj={};
-  TEAMS.forEach(t=>{
-    const el = $("mv-"+t.id);
-    const v = el && el.value!=="" ? parseFloat(el.value) : NaN;
-    if(isFinite(v)) obj[t.id]=v;
-  });
-  state.scores[wk]=obj; save(); render();
-}
-function clearWeek(){
-  const wk = +$("manWk").value;
-  if(!confirm("Clear all scores for week "+wk+"?")) return;
-  delete state.scores[wk]; save(); render();
-}
-
-/* ---------- schedule ---------- */
-function renderSched(){
-  const wk = +$("schedWk").value;
-  const pairs = state.schedule[wk] || [];
-  let h = '<div class="grid2">';
-  for(let i=0;i<N/2;i++){
-    const p = pairs[i] || [0,0];
-    const opts = id => TEAMS.map(t=>`<option value="${t.id}" ${t.id===id?"selected":""}>${esc(t.name)}</option>`).join("");
-    h += `<div class="entry" style="display:block">
-      <select id="sa-${i}" style="width:100%;margin-bottom:6px"><option value="0">—</option>${opts(p[0])}</select>
-      <select id="sb-${i}" style="width:100%"><option value="0">—</option>${opts(p[1])}</select>
+  row.forEach(p => {
+    const cell = document.createElement("div");
+    cell.className = "cell" + (p.seat === MY_SEAT ? " mine" : "");
+    cell.dataset.seat = p.seat;
+    cell.innerHTML = `<div class="pick ${p.pos}${p.seat === MY_SEAT ? " mine" : ""}"
+        data-pos="${p.pos}" data-name="${p.name.toLowerCase()}">
+      <div class="no">${p.overall}</div>
+      <div class="name">${p.name}</div>
+      <div class="meta"><span class="pos ${p.pos}">${p.pos}</span><span class="nfl">${p.team}</span></div>
     </div>`;
-  }
-  $("schedBody").innerHTML = h + '</div>';
-}
-function saveSched(){
-  const wk = +$("schedWk").value, out=[], used=new Set();
-  for(let i=0;i<N/2;i++){
-    const a = +$("sa-"+i).value, b = +$("sb-"+i).value;
-    if(!a || !b) continue;
-    if(a===b){ alert("A team cannot play itself."); return; }
-    if(used.has(a) || used.has(b)){ alert("Each team can only appear once per week."); return; }
-    used.add(a); used.add(b); out.push([a,b]);
-  }
-  state.schedule[wk]=out; save(); render();
-  alert("Week "+wk+" pairings saved.");
-}
-
-/* ---------- export ---------- */
-function dl(name, text, type){
-  const b = new Blob([text], {type});
-  const u = URL.createObjectURL(b), a = document.createElement("a");
-  a.href=u; a.download=name; a.click(); URL.revokeObjectURL(u);
-}
-function exportCsv(){
-  const {rows} = season();
-  const head = ["Team","GP","W","L","T","PF","PA","Avg","CV","xWins","Power","Ceiling","Luck","AllPlayPct"];
-  const lines = [head.join(",")];
-  rows.forEach(r=>lines.push([
-    '"'+r.name.replace(/"/g,'""')+'"', r.gp, r.w, r.l, r.t,
-    f2(r.pf), f2(r.pa), f2(r.avg), f2(r.cv), f2(r.xWins), f2(r.power), f2(r.ceiling), f2(r.luck), f2(r.apPct)
-  ].join(",")));
-  lines.push("");
-  lines.push(["Week"].concat(TEAMS.map(t=>'"'+t.name+'"')).join(","));
-  for(let w=1;w<=WEEKS;w++){
-    if(!state.scores[w]) continue;
-    lines.push([w].concat(TEAMS.map(t=>{
-      const v = state.scores[w][t.id];
-      return typeof v==="number" ? f2(v) : "";
-    })).join(","));
-  }
-  dl("megabowl2026_power.csv", lines.join("\n"), "text/csv");
-}
-function exportJson(){ dl("megabowl2026_backup.json", JSON.stringify(state,null,2), "application/json"); }
-function wipe(){
-  if(!confirm("Erase every score and reset the schedule to weeks 1 and 2?")) return;
-  state = blank(); save(); render();
-  alert("Cleared.");
-}
-
-/* ---------- boot ---------- */
-function fillWeekPickers(){
-  const {played} = season();
-  const opts = [];
-  for(let w=1;w<=WEEKS;w++){
-    const has = state.scores[w] && Object.keys(state.scores[w]).length;
-    opts.push(`<option value="${w}">Week ${w}${has?" · "+Object.keys(state.scores[w]).length+" scores":""}</option>`);
-  }
-  ["wkPick","pasteWk","manWk","schedWk"].forEach(id=>{
-    const el = $(id), keep = el.value;
-    el.innerHTML = opts.join("");
-    if(keep) el.value = keep;
-    else if(id==="wkPick" && played.length) el.value = played[played.length-1];
-    else if((id==="pasteWk"||id==="manWk") && played.length<WEEKS) el.value = Math.min(WEEKS, played.length+1);
+    frag.appendChild(cell);
   });
+});
+
+board.appendChild(frag);
+
+// ---- filtering ----
+let posFilter = "ALL";
+let query = "";
+let spotlight = null;
+
+const picks = [...board.querySelectorAll(".pick")];
+const hint = document.getElementById("hint");
+
+function apply(){
+  let shown = 0;
+  picks.forEach(el => {
+    const okPos = posFilter === "ALL" || el.dataset.pos === posFilter;
+    const okQ = !query || el.dataset.name.includes(query);
+    const on = okPos && okQ;
+    el.classList.toggle("muted", !on);
+    if(on) shown++;
+  });
+
+  board.querySelectorAll(".cell").forEach(c =>
+    c.classList.toggle("spot", spotlight !== null && +c.dataset.seat === spotlight));
+  board.querySelectorAll(".th[data-seat]").forEach(t =>
+    t.classList.toggle("spot", spotlight !== null && +t.dataset.seat === spotlight));
+
+  const bits = [];
+  bits.push(`${shown} of 180 picks`);
+  if(spotlight) bits.push(TEAMS[spotlight-1]);
+  hint.textContent = bits.join(" · ");
 }
-function render(){
-  fillWeekPickers();
-  const {played} = season();
-  $("metaLine").textContent = played.length
-    ? `${played.length} of ${WEEKS} weeks logged · through week ${played[played.length-1]}`
-    : "No weeks logged yet";
-  if(view==="board") renderBoard();
-  if(view==="week")  renderWeek();
-  if(view==="enter") renderManual();
-  if(view==="sched") renderSched();
+
+document.querySelectorAll(".chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    posFilter = chip.dataset.pos;
+    document.querySelectorAll(".chip").forEach(c =>
+      c.setAttribute("aria-pressed", String(c === chip)));
+    apply();
+  });
+});
+
+document.getElementById("search").addEventListener("input", e => {
+  query = e.target.value.trim().toLowerCase();
+  apply();
+});
+
+function toggleSeat(seat){
+  spotlight = (spotlight === seat) ? null : seat;
+  apply();
 }
-applyTeamNames(state.teamNames);
-render();
+board.querySelectorAll(".th[data-seat]").forEach(th => {
+  th.addEventListener("click", () => toggleSeat(+th.dataset.seat));
+  th.addEventListener("keydown", e => {
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggleSeat(+th.dataset.seat); }
+  });
+});
+
+apply();
 </script>
-</div>
 </body>
 </html>
